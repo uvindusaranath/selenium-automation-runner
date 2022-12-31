@@ -5,7 +5,7 @@ services:
     ports:
       - "4444:4444"
   chrome:
-    image: selenium/node-chrome:3.14git
+    image: selenium/node-chrome:3.14
     depends_on:
       - hub
     environment:
@@ -23,7 +23,7 @@ services:
       - chrome
       - firefox
     environment:
-      - BROWSER=firefox
+      - BROWSER=chrome
       - HUB_HOST=hub
       - MODULE=book-flight-module.xml
     volumes:
