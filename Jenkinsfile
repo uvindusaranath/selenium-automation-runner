@@ -3,24 +3,25 @@ pipeline{
 	stages{
 		stage("Pull Latest Image"){
 			steps{
-				bat "docker pull uvindu/selenium-docker"
+				sh "docker pull vinsdocker/selenium-docker"
 			}
 		}
 		stage("Start Grid"){
 			steps{
-				bat "docker-compose up -d hub chrome firefox"
+				sh "docker-compose up -d hub chrome firefox"
 			}
 		}
 		stage("Run Test"){
 			steps{
-				bat "docker-compose up search-module book-flight-module"
+				sh "docker-compose up search-module book-flight-module"
 			}
 		}
 	}
 	post{
 		always{
 			archiveArtifacts artifacts: 'output/**'
-			bat "docker-compose down"
+			sh "docker-compose down"
+			sh "sudo rm -rf output/"
 		}
 	}
 }
